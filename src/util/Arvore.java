@@ -20,6 +20,10 @@ public class Arvore {
 
     private void remover(int valor, No local) {
         if (valor > local.valor) {
+            if (local.direita == null) {
+                System.out.println("Numero nao existente na arvore...");
+                return;
+            }
             if (local.direita.valor == valor) {
                 local.direita = null;
                 System.out.println("Numero " + valor + " removido da arvore!");
@@ -29,6 +33,10 @@ public class Arvore {
             return;
         }
         if (valor < local.valor) {
+            if (local.esquerda == null) {
+                System.out.println("Numero nao existente na arvore...");
+                return;
+            }
             if (local.esquerda.valor == valor) {
                 local.esquerda = null;
                 System.out.println("Numero " + valor + " removido da arvore!");
@@ -37,32 +45,17 @@ public class Arvore {
             remover(valor, local.esquerda);
             return;
         }
-        System.out.println("Numero nao existente na arvore...");
     }
 
-    public void imprimirPos() {
+    public void imprimir() {
         No local = raiz;
-        System.out.println("Pos fix:");
+        System.out.print("Pos fix: ");
         imprimirPos(local);
-        System.out.println(" ");
-    }
-
-    private void imprimirPos(No local) {
-        if (local.esquerda != null) {
-            imprimirPos(local.esquerda);
-        }
-        if (local.direita != null) {
-            imprimirPos(local.direita);
-        }
-        System.out.print(local.valor);
-    }
-
-    public void imprimirPre() {
-        No local = raiz;
-        System.out.println("Pre fix:");
+        System.out.print("\nPre fix: ");
         imprimirPre(local);
-        System.out.print(" ");
-        System.out.println("\n");
+        System.out.print("\nIn fix: ");
+        imprimirIn(local);
+        System.out.println("");
     }
 
     private void imprimirPre(No local) {
@@ -75,21 +68,24 @@ public class Arvore {
         }
     }
 
-    public void imprimirInfix() {
-        No local = raiz;
-        System.out.println("Infix:");
-        imprimirInfix(local);
-        System.out.print(" ");
-        System.out.println();
+    private void imprimirIn(No local) {
+        if (local.esquerda != null) {
+            imprimirIn(local.esquerda);
+        }
+        System.out.print(local.valor);
+        if (local.direita != null) {
+            imprimirIn(local.direita);
+        }
     }
 
-
-    private void imprimirInfix(No local) {
-        if (local != null) {
-            imprimirInfix(local.esquerda);
-            System.out.print(local.valor);
-            imprimirInfix(local.direita);
+    private void imprimirPos(No local) {
+        if (local.esquerda != null) {
+            imprimirPos(local.esquerda);
         }
+        if (local.direita != null) {
+            imprimirPos(local.direita);
+        }
+        System.out.print(local.valor);
     }
 
     /*

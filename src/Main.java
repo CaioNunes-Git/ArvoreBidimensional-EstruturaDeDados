@@ -5,7 +5,7 @@ public class Main {
         Arvore arvore = new Arvore();
         // 5, 7, 2, 1, 8, 9, 8, 7, 3 ,0
         // arvore.tamanho();
-        System.out.println("Tamanho da Árvore: " + arvore.alturaArvore(arvore.raiz));
+        System.out.println("Tamanho da ï¿½rvore: " + arvore.alturaArvore(arvore.raiz));
         arvore.inserir(5);
         System.out.println(arvore.isFolha(arvore.raiz));
         arvore.inserir(7);
@@ -24,25 +24,19 @@ public class Main {
         System.out.println(arvore.isFolha(arvore.raiz));
         arvore.inserir(3);
         System.out.println(arvore.isFolha(arvore.raiz));
-        System.out.println("Tamanho da Árvore: " + arvore.alturaArvore(arvore.raiz));
+        System.out.println("Tamanho da ï¿½rvore: " + arvore.alturaArvore(arvore.raiz));
         arvore.inserir(0);
         System.out.println("\n");
-        imprimirArvore(arvore);
+        arvore.imprimir();
         System.out.println("");
         listarDireitaEsquerda(arvore);
         System.out.println("\n");
         removerDireitaEsquerda(arvore);
-        System.out.println("Tamanho da Árvore: " + arvore.alturaArvore(arvore.raiz));
+        System.out.println("Tamanho da ï¿½rvore: " + arvore.alturaArvore(arvore.raiz));
         //arvore.totalFolha
     //System.out.println(arvore.listaEsquerda());
         //arvore.listaEsquerda();
 
-    }
-
-    private static void imprimirArvore(Arvore arvore) {
-        arvore.imprimirPos();
-        arvore.imprimirInfix();
-        arvore.imprimirPre();
     }
 
     private static void removerDireitaEsquerda(Arvore arvore) {
