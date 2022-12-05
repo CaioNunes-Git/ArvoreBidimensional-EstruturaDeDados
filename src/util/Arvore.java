@@ -1,18 +1,62 @@
 package util;
 
-import java.util.ArrayList;
-
 public class Arvore {
     public No raiz = null;
-    public ArrayList<Integer> direita = new ArrayList<>();
-    public ArrayList<Integer> esquerda = new ArrayList<>();
+    private boolean yesItIs=false;
 
     public Arvore() {
     }
 
+    public void inserir(int valor) {
+        if (raiz != null) {
+            inserir(valor, raiz);
+            return;
+        }
+        raiz = new No(valor);
+        System.out.println("Numero " + valor + " inserido na raiz!");
+    }
+
+    private void inserir(int valor, No local) {
+        if (valor > local.valor) {
+            inserirMaior(valor, local);
+            return;
+        }
+        if (valor < local.valor) {
+            inserirMenor(valor, local);
+            return;
+        }
+        System.out.println("Numero " + valor + " ja existia na arvore!");
+    }
+
+    private void inserirMaior(int valor, No local) {
+        if (local.direita != null) {
+            inserir(valor, local.direita);
+            return;
+        }
+        local.direita = new No(valor);
+        local.direita.pai = local;
+        System.out.println("Numero " + valor + " inserido na direita!");
+
+    }
+
+    private void inserirMenor(int valor, No local) {
+        if (local.esquerda != null) {
+            inserir(valor, local.esquerda);
+            return;
+        }
+        local.esquerda = new No(valor);
+        local.esquerda.pai = local;
+        System.out.println("Numero " + valor + " inserido na esquerda!");
+    }
+
     public void remover(int valor) {
         if (raiz != null) {
-            remover(valor, raiz);
+            if(raiz.valor != valor) {
+                remover(valor, raiz);
+                return;
+            }
+            raiz = null;
+            System.out.println("Raiz foi removida!");
             return;
         }
         System.out.println("Arvore vazia!");
@@ -43,19 +87,22 @@ public class Arvore {
                 return;
             }
             remover(valor, local.esquerda);
-            return;
         }
     }
 
     public void imprimir() {
-        No local = raiz;
-        System.out.print("Pos fix: ");
-        imprimirPos(local);
-        System.out.print("\nPre fix: ");
-        imprimirPre(local);
-        System.out.print("\nIn fix: ");
-        imprimirIn(local);
-        System.out.println("");
+        if (raiz != null) {
+            No local = raiz;
+            System.out.print("Pos fix: ");
+            imprimirPos(local);
+            System.out.print("\nPre fix: ");
+            imprimirPre(local);
+            System.out.print("\nIn fix: ");
+            imprimirIn(local);
+            System.out.println("");
+            return;
+        }
+        System.out.println("Arvore vazia!");
     }
 
     private void imprimirPre(No local) {
@@ -88,71 +135,11 @@ public class Arvore {
         System.out.print(local.valor);
     }
 
-    /*
-    public int ElementosEsq(int valor) {
-        if (local.esquerda != null) {
-            return local.esquerda;
-        }
-        return null;
+    public Integer alturaArvore() {
+        return alturaArvore(raiz);
     }
 
-    public int ElementosDir(No local) {
-        if (local.direita != null) {
-            return local.direita;
-        }
-        return 0;
-    }*/
-
-
-
-    public void inserir(int valor) {
-        if (raiz != null) {
-            inserir(valor, raiz);
-            return;
-        }
-        raiz = new No(valor);
-        System.out.println("Numero " + valor + " inserido na raiz!");
-    }
-
-    private void inserir(int valor, No local) {
-        if (valor > local.valor) {
-            inserirMaior(valor, local);
-            return;
-        }
-        if (valor < local.valor) {
-            inserirMenor(valor, local);
-            return;
-        }
-        System.out.println("Numero " + valor + " ja existia na arvore!");
-    }
-
-    private void inserirMaior(int valor, No local) {
-        if (local.direita != null) {
-            System.out.println("Direita");
-            inserir(valor, local.direita);
-            return;
-        }
-        local.direita = new No(valor);
-        direita.add(local.direita.valor);
-        local.direita.pai = local;
-        System.out.println("Numero " + valor + " inserido na direita!");
-
-    }
-
-    private void inserirMenor(int valor, No local) {
-        if (local.esquerda != null) {
-            System.out.println("Esquerda");
-            inserir(valor, local.esquerda);
-            return;
-        }
-        local.esquerda = new No(valor);
-        esquerda.add(local.esquerda.valor);
-        local.esquerda.pai = local;
-        System.out.println("Numero " + valor + " inserido na esquerda!");
-
-    }
-
-    public Integer alturaArvore(No raiz) {
+    private Integer alturaArvore(No raiz) {
         if (raiz == null || raiz.direita == null && raiz.esquerda == null) {
             return 0;
         } else {
@@ -165,21 +152,63 @@ public class Arvore {
             }
         }
     }
-//    public int totalFolhas(No no) {
-//        if (no == null){
-//            return 0;
-//        }
-//        if(no.direita == null && no.esquerda == null){
-//            return 1;
-//        }
-//        return totalFolhas(no.esquerda) + totalFolhas(no.direita);
-//    }
-    public boolean isFolha(No no) {
-        if (no.direita == null && no.esquerda == null) {
-            return true;
-        }
 
-        isFolha(no.direita);
-        return false;
+    public void listarDireita() {
+        No local = raiz;
+        listarDireita(local);
+        System.out.println("");
+    }
+
+    private void listarDireita(No local) {
+        if (local.esquerda != null) {
+            listarDireita(local.esquerda);
+        }
+        if (local.direita != null) {
+            listarDireita(local.direita);
+            System.out.print(local.direita.valor);
+        }
+    }
+
+    public void listarEsquerda() {
+        No local = raiz;
+        listarEsquerda(local);
+        System.out.println("");
+    }
+
+    private void listarEsquerda(No local) {
+        if (local.esquerda != null) {
+            listarEsquerda(local.esquerda);
+            System.out.print(local.esquerda.valor);
+        }
+        if (local.direita != null) {
+            listarEsquerda(local.direita);
+        }
+    }
+    
+    public void isFolha(int valor) {
+        No local = raiz;
+        yesItIs = false;
+        if (local.valor == valor) {
+            System.out.println(valor+ " e raiz!\n");
+            return;
+        }
+        isFolha(local, valor);
+        if (yesItIs) {
+            System.out.println(valor+" e folha!\n");
+        } else {
+            System.out.println(valor+" nao e folha!\n");
+        }
+    }
+
+    private void isFolha(No local, int valor) {
+        if (local.esquerda != null) {
+            isFolha(local.esquerda, valor);
+        }
+        if (local.direita != null) {
+            isFolha(local.direita, valor);
+        }
+        if (local.valor == valor && local.direita == null && local.esquerda == null) {
+            yesItIs = true;
+        }
     }
 }

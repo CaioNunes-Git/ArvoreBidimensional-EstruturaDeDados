@@ -4,61 +4,29 @@ public class Main {
     public static void main(String[] args) {
         Arvore arvore = new Arvore();
         // 5, 7, 2, 1, 8, 9, 8, 7, 3 ,0
-        // arvore.tamanho();
-        System.out.println("Tamanho da �rvore: " + arvore.alturaArvore(arvore.raiz));
         arvore.inserir(5);
-        System.out.println(arvore.isFolha(arvore.raiz));
         arvore.inserir(7);
-        System.out.println(arvore.isFolha(arvore.raiz));
         arvore.inserir(2);
-        System.out.println(arvore.isFolha(arvore.raiz));
         arvore.inserir(1);
-        System.out.println(arvore.isFolha(arvore.raiz));
         arvore.inserir(8);
-        System.out.println(arvore.isFolha(arvore.raiz));
         arvore.inserir(9);
-        System.out.println(arvore.isFolha(arvore.raiz));
         arvore.inserir(8);
-        System.out.println(arvore.isFolha(arvore.raiz));
         arvore.inserir(7);
-        System.out.println(arvore.isFolha(arvore.raiz));
         arvore.inserir(3);
-        System.out.println(arvore.isFolha(arvore.raiz));
-        System.out.println("Tamanho da �rvore: " + arvore.alturaArvore(arvore.raiz));
+        System.out.println("\nTamanho da arvore: " + arvore.alturaArvore() +"\n");
         arvore.inserir(0);
-        System.out.println("\n");
+        System.out.print("\nListar direita: ");
+        arvore.listarDireita();
+        System.out.print("Listar esquerda: ");
+        arvore.listarEsquerda();
         arvore.imprimir();
-        System.out.println("");
-        listarDireitaEsquerda(arvore);
-        System.out.println("\n");
-        removerDireitaEsquerda(arvore);
-        System.out.println("Tamanho da �rvore: " + arvore.alturaArvore(arvore.raiz));
-        //arvore.totalFolha
-    //System.out.println(arvore.listaEsquerda());
-        //arvore.listaEsquerda();
-
-    }
-
-    private static void removerDireitaEsquerda(Arvore arvore) {
-        System.out.println("---Removendo todos os elementos da direita---");
-        for (int i = 0; i < arvore.direita.size(); i++) {
-            arvore.direita.remove(i);
-        }
-        System.out.println("\n");
-        System.out.println("---Removendo todos os elementos da esquerda---");
-        for (int i = 0; i < arvore.esquerda.size(); i++) {
-            arvore.esquerda.remove(i);
-        }
-    }
-
-    private static void listarDireitaEsquerda(Arvore arvore) {
-        System.out.println("---Listando Direita---");
-        for (int i = 0; i < arvore.direita.size(); i++) {
-            System.out.println(arvore.direita.get(i));
-        }
-        System.out.println("---Listando Esquerda---");
-        for (int i = 0; i < arvore.esquerda.size(); i++) {
-            System.out.println(arvore.esquerda.get(i));
-        }
+        arvore.isFolha(0);
+        arvore.remover(0);
+        arvore.remover(9);
+        arvore.imprimir();
+        System.out.println("\nTamanho da arvore: " + arvore.alturaArvore() +"\n");
+        arvore.remover(5);
+        arvore.imprimir();
+        System.out.println("\nTamanho da arvore: " + arvore.alturaArvore() +"\n");
     }
 }
